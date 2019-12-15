@@ -98,9 +98,9 @@ try {
         const sync = function (localTree, crowdinTree) {
             for (let i in localTree) {
                 // is this a dir or a file?
-                if (typeof localTree[i] !== "string") {
+                if (typeof localTree[i] === "object") {
                     // tree, does it exist online?
-                    if (crowdinTree[i]!== "string") {
+                    if (crowdinTree[i]) {
                         // yes, sync it
                         sync(localTree[i], crowdinTree[i]);
                     } else {
