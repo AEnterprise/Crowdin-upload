@@ -148,7 +148,7 @@ try {
                     } else {
                         //nope, but it still goes the way of the dodo
                         post("delete-file", {
-                            file: `docs/${crowdin_tree[i]}`
+                            files: []`docs/${crowdin_tree[i]}`]
                         })
                     }
                     //it does, does it have subobjects to clean?
