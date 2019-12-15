@@ -137,7 +137,7 @@ try {
         const cleanup = function (localTree, crowdin_tree, prefix) {
             for (let i in crowdin_tree) {
                 //does this exist locally?
-                if (localTree[i]) {
+                if (!localTree[i]) {
                     // is this a dir or a file?
                     if (typeof crowdin_tree[i] === "object") {
                         //yup, bye bye
