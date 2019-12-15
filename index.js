@@ -3,8 +3,8 @@ const fs = require('fs');
 const request = require('request');
 
 const walkSync = function (dir) {
-    files = fs.readdirSync(dir);
-    filelist = {};
+    let files = fs.readdirSync(dir);
+    let filelist = {};
     files.forEach(function (file) {
         if (fs.statSync(dir + file).isDirectory()) {
             filelist[file] = walkSync(dir + file + '/');
