@@ -45,6 +45,8 @@ try {
                     core.setFailed(e.message);
 
                 console.log(`statuscode: ${res.statusCode}`);
+                console.log(res)
+                console.log(body)
 
                 if (handler)
                     handler(JSON.parse(body))
