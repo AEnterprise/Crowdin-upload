@@ -53,7 +53,7 @@ try {
                 if (handler)
                     handler(JSON.parse(body))
             });
-        req.form().append("file", fs.createReadStream(filename));
+        req.form().append("files", [fs.createReadStream(filename)]);
     };
 
 
@@ -105,7 +105,7 @@ try {
                         sync(localTree[i], crowdinTree[i]);
                     } else {
                         //nope, create and sync it
-                        post("add-directory", {}, data => sync(localTree[i], []), `&name=${i}`);
+                        post("add-directory", {}, data => sync(localTree[i], []), `&name=docs/${i}`);
                         sync(localTree[i], {});
                     }
                 } else {
