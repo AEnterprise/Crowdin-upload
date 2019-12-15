@@ -1,14 +1,14 @@
 const core = require('@actions/core');
 const fs = require('fs');
 
-var walkSync = function (dir, filelist) {
+var walkSync = function (dir, filelist, addDir) {
     files = fs.readdirSync(dir);
     filelist = filelist || [];
     files.forEach(function (file) {
         if (fs.statSync(dir + file).isDirectory()) {
             filelist = walkSync(dir + file + '/', filelist);
         } else {
-            filelist.push(file);
+            filelist.push(`${addDir ? dir : ""}${file}`);
         }
     });
     return filelist;
