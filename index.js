@@ -32,8 +32,10 @@ try {
 
                 console.log(`statuscode: ${res.statusCode}`);
 
+                console.log("pre handler")
                 if (handler)
                     handler(JSON.parse(body))
+                console.log("handler complete")
             });
     };
 
