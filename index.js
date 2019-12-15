@@ -118,12 +118,16 @@ try {
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
                         const data = {};
-                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]));
+                        const f = localTree[i].split("/").filter((value, index) => index > 0).join("/");
+                        data[`files[docs/${f}]`] = fs.createReadStream(resolve(localTree[i]));
+                        data[`export_patterns[docs/${f}]`] = "/%original_path%/%file_name%.%locale%.%file_extension%";
                         upload("update-file", data)
                     } else {
                         //it doesn't, create it
                         const data = {};
-                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]));
+                        const f = localTree[i].split("/").filter((value, index) => index > 0).join("/");
+                        data[`files[docs/${f}]`] = fs.createReadStream(resolve(localTree[i]));
+                        data[`export_patterns[docs/${f}]`] = "/%original_path%/%file_name%.%locale%.%file_extension%";
                         upload("add-file", data)
                     }
                 }
