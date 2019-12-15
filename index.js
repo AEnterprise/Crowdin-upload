@@ -33,14 +33,12 @@ try {
                 if (e)
                     core.setFailed(e.message);
 
-                console.log(`statuscode: ${res.statusCode}`);
                 if (res.statusCode != 200) {
                     console.log(endpoint)
                     console.log(data)
                     core.setFailed("failed request")
                 }
 
-                console.log(body)
                 if (handler)
                     handler(JSON.parse(body))
             });
@@ -56,10 +54,8 @@ try {
                     core.setFailed(e.message);
 
                 console.log(`statuscode: ${res.statusCode}`);
-                console.log(body)
                 if (res.statusCode != 200)
                     core.setFailed("failed request")
-                //console.log(res)
 
 
                 if (handler)
@@ -102,7 +98,6 @@ try {
         };
 
         const crowdin_tree = walk("", folder);
-        console.log(crowdin_tree);
 
         //loop over local tree and sync/create as needed
         const sync = function (localTree, crowdinTree) {
@@ -136,7 +131,6 @@ try {
         };
 
         const localTree = walkSync(core.getInput("dir"));
-        console.log(localTree)
         sync(localTree, crowdin_tree);
 
         const cleanup = function (localTree, crowdin_tree, prefix) {
