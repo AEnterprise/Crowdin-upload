@@ -114,12 +114,24 @@ try {
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
                         upload("update-file", {
-                            files: [fs.createReadStream(localTree[i])]
+                            files: [
+                                {
+                                    value: fs.readFileSync(localTree[i]),
+                                    options: {
+                                        filename: `docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`
+                                    }
+                                }]
                         })
                     } else {
                         //it doesn't, create it
                         upload("add-file", {
-                            files: [fs.createReadStream(localTree[i])]
+                            files: [
+                                {
+                                    value: fs.readFileSync(localTree[i]),
+                                    options: {
+                                        filename: `docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`
+                                    }
+                                }]
                         })
                     }
                 }
