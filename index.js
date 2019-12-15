@@ -34,6 +34,7 @@ try {
                 console.log(`statuscode: ${res.statusCode}`);
                 if (res.statusCode != 200) {
                     console.log(endpoint)
+                    console.log(data)
                     core.setFailed("failed request")
                 }
 
