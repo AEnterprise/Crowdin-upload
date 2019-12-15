@@ -24,24 +24,27 @@ try {
     const crowdin_project_identifier = core.getInput("crowdin_project_identifier");
 
     const post = function (endpoint, data, handler, extra) {
-        request.post(`$https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
+        request.post(`https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
             data,
             (e, res, body) => {
                 if (e)
                     core.setFailed(e.message);
-                console.log(body)
+
+                console.log(`statuscode: ${res.statusCode}`);
+
                 if (handler)
                     handler(JSON.parse(body))
             });
     };
 
     const upload = function (endpoint, filename, data, handler) {
-        let req = request.post(`$https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json}`,
+        let req = request.post(`https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json}`,
             data,
             (e, res, body) => {
                 if (e)
                     core.setFailed(e.message);
 
+                console.log(`statuscode: ${res.statusCode}`);
 
                 if (handler)
                     handler(JSON.parse(body))
