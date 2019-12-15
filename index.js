@@ -144,8 +144,9 @@ try {
                         post("delete-directory", {}, ()=> {}, `&name=${prefix}/${i}`)
                     } else {
                         //nope, but it still goes the way of the dodo
-                        console.log(`&name=docs/${crowdin_tree[i]}`)
-                        post("delete-file", {}, ()=> {}, `&name=docs/${crowdin_tree[i]}`)
+                        post("delete-file", {
+                            file: `docs/${crowdin_tree[i]}`
+                        })
                     }
                     //it does, does it have subobjects to clean?
                 } else if (typeof crowdin_tree[i] === "object") {
