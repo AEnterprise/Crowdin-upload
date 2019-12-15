@@ -32,6 +32,8 @@ try {
                     core.setFailed(e.message);
 
                 console.log(`statuscode: ${res.statusCode}`);
+                if (res.statusCode != 200)
+                    core.setFailed("failed request")
 
                 console.log("pre handler")
                 if (handler)
@@ -50,6 +52,8 @@ try {
                     core.setFailed(e.message);
 
                 console.log(`statuscode: ${res.statusCode}`);
+                if (res.statusCode != 200)
+                    core.setFailed("failed request")
                 //console.log(res)
                 console.log(body)
 
@@ -121,8 +125,8 @@ try {
                         //it doesn't, create it
                         const data = {};
                         data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(resolve(localTree[i]))
-                        console.log(fs.existsSync(path))
-                        console.log(resolve(fs.existsSync(path)))
+                        console.log(fs.existsSync(localTree[i]))
+                        console.log(resolve(fs.existsSync(localTree[i])))
                         console.log(data);
                         upload("add-file", data)
                     }
