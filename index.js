@@ -35,6 +35,7 @@ try {
             console.log(`statuscode: ${res.statusCode}`);
 
             res.on('data', data => {
+                console.log(data);
                 handler(JSON.parse(data))
             })
 
