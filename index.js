@@ -29,8 +29,7 @@ try {
             (e, res, body) => {
                 if (e)
                     core.setFailed(e.message);
-
-
+                console.log(body)
                 if (handler)
                     handler(JSON.parse(body))
             });
