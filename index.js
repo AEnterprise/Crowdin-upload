@@ -114,13 +114,13 @@ try {
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
                         const files = {};
-                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
+                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.readFileSync(localTree[i])
                         upload("update-file", {
                             files: files
                         })
                     } else {
                         //it doesn't, create it
-                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
+                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.readFileSync(localTree[i])
                         upload("add-file", {
                             files: files
                         })
