@@ -113,25 +113,16 @@ try {
                     // we are a file, check if it exists online
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
+                        const files = {};
+                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
                         upload("update-file", {
-                            files: [
-                                {
-                                    value: fs.readFileSync(localTree[i]),
-                                    options: {
-                                        filename: `docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`
-                                    }
-                                }]
+                            files: files
                         })
                     } else {
                         //it doesn't, create it
+                        files[`docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
                         upload("add-file", {
-                            files: [
-                                {
-                                    value: fs.readFileSync(localTree[i]),
-                                    options: {
-                                        filename: `docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`
-                                    }
-                                }]
+                            files: files
                         })
                     }
                 }
