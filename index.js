@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const fs = require('fs');
 const request = require('request');
+resolve = require('path').resolve;
 
 const walkSync = function (dir) {
     let files = fs.readdirSync(dir);
@@ -114,12 +115,12 @@ try {
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
                         const data = {};
-                        data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
+                        data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(resolve(localTree[i]))
                         upload("update-file", data)
                     } else {
                         //it doesn't, create it
                         const data = {};
-                        data[`files.docs/${localTree[i].split(".")[0].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
+                        data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(resolve(localTree[i]))
                         console.log(data);
                         upload("add-file", data)
                     }
