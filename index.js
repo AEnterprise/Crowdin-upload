@@ -35,10 +35,9 @@ try {
                 if (res.statusCode != 200)
                     core.setFailed("failed request")
 
-                console.log("pre handler")
+                console.log(body)
                 if (handler)
                     handler(JSON.parse(body))
-                console.log("handler complete")
             });
     };
 
