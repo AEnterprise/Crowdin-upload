@@ -39,9 +39,11 @@ try {
             });
     };
 
-    const upload = function (endpoint, filename, data, handler) {
-        let req = request.post(`https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json}`,
-            data,
+    const upload = function (endpoint, data, handler) {
+        let req = request.post({
+                url: `https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json}`,
+                formData: data
+            },
             (e, res, body) => {
                 if (e)
                     core.setFailed(e.message);
@@ -112,10 +114,14 @@ try {
                     // we are a file, check if it exists online
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
-                        upload("update-file", localTree[i], {})
+                        upload("update-file", {
+                            files: [fs.createReadStream(localTree[i])]
+                        })
                     } else {
                         //it doesn't, create it
-                        upload("add-file", localTree[i], {})
+                        upload("add-file", {
+                            files: [fs.createReadStream(localTree[i])]
+                        })
                     }
                 }
             }
