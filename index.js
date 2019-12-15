@@ -121,6 +121,8 @@ try {
                         //it doesn't, create it
                         const data = {};
                         data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(resolve(localTree[i]))
+                        console.log(fs.existsSync(path))
+                        console.log(resolve(fs.existsSync(path)))
                         console.log(data);
                         upload("add-file", data)
                     }
