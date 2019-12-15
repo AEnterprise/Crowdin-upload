@@ -150,7 +150,7 @@ try {
                     } else {
                         //nope, but it still goes the way of the dodo
                         post("delete-file", {
-                            file: `docs/${crowdin_tree[i]}`
+                            file: `docs/${crowdin_tree[i]}`.replace("//", "/")
                         })
                     }
                     //it does, does it have subobjects to clean?
