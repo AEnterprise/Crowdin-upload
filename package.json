@@ -1,7 +1,7 @@
 {
-  "name": "hello-world-javascript-action",
+  "name": "crowdin-uploader",
   "version": "1.0.0",
-  "description": "This action prints \"Hello World\" or \"Hello\" + the name of a person to greet to the log.",
+  "description": "Upload translations to Crowdin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,12 +11,12 @@
     "url": "git+https://github.com/actions/hello-world-javascript-action.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "AEnterprise",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/actions/hello-world-javascript-action/issues"
+    "url": "https://github.com/AEnterprise/Crowdin-upload/issues"
   },
-  "homepage": "https://github.com/actions/hello-world-javascript-action#readme",
+  "homepage": "https://github.com/AEnterprise/Crowdin-upload#readme",
   "dependencies": {
     "@actions/core": "^1.1.0",
     "@actions/github": "^1.1.0"
