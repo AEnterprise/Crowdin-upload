@@ -32,8 +32,10 @@ try {
                     core.setFailed(e.message);
 
                 console.log(`statuscode: ${res.statusCode}`);
-                if (res.statusCode != 200)
-                    core.setFailed("failed request", endpoint)
+                if (res.statusCode != 200) {
+                    console.log(endpoint)
+                    core.setFailed("failed request")
+                }
 
                 console.log(body)
                 if (handler)
