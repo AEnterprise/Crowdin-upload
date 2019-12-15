@@ -35,8 +35,13 @@ try {
             console.log(`statuscode: ${res.statusCode}`);
             res.setEncoding('utf8');
 
-            res.on('data', data => {
-                console.log(data);
+            let data = "";
+
+            res.on('data', d => {
+                data += d
+            });
+
+            res.on("end", ()=> {
                 handler(JSON.parse(data))
             })
 
