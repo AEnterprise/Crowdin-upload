@@ -25,8 +25,10 @@ try {
     const crowdin_project_identifier = core.getInput("crowdin_project_identifier");
 
     const post = function (endpoint, data, handler, extra) {
-        request.post(`https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
-            data,
+        request.post({
+            url: `https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
+            formData: data
+            },
             (e, res, body) => {
                 if (e)
                     core.setFailed(e.message);
@@ -148,7 +150,7 @@ try {
                     } else {
                         //nope, but it still goes the way of the dodo
                         post("delete-file", {
-                            files: [`docs/${crowdin_tree[i]}`]
+                            file: `docs/${crowdin_tree[i]}`
                         })
                     }
                     //it does, does it have subobjects to clean?
