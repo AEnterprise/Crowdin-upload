@@ -23,7 +23,7 @@ try {
     const crowdin_api_key = core.getInput("crowdin_api_key");
     const crowdin_project_identifier = core.getInput("crowdin_project_identifier");
 
-    const post = function (endpoint, data, handler) {
+    const post = function (endpoint, data, handler, extra) {
         request.post(`$https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
             data,
             (e, res, body) => {
@@ -38,7 +38,7 @@ try {
     };
 
     const upload = function (endpoint, filename, data, handler) {
-        let req = request.post(`$https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json${extra ? extra : ""}`,
+        let req = request.post(`$https://api.crowdin.com/api/project/${crowdin_project_identifier}/${endpoint}?login=${crowdin_username}&account-key=${crowdin_api_key}&json}`,
             data,
             (e, res, body) => {
                 if (e)
@@ -99,7 +99,7 @@ try {
                         sync(localTree[i], crowdinTree[i]);
                     } else {
                         //nope, create and sync it
-                        post("add-directory", {}, data => sync(localTree[i], []), `&name=${i}`)
+                        post("add-directory", {}, data => sync(localTree[i], []), `&name=${i}`);
                         sync(localTree[i], {});
                     }
                 } else {
