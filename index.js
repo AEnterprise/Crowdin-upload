@@ -119,13 +119,12 @@ try {
                     if (crowdinTree.hasOwnProperty(i)) {
                         //it does, sync it
                         const data = {};
-                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]))
+                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]));
                         upload("update-file", data)
                     } else {
                         //it doesn't, create it
                         const data = {};
-                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]))
-                        console.log(data);
+                        data[`files[docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}]`] = fs.createReadStream(resolve(localTree[i]));
                         upload("add-file", data)
                     }
                 }
@@ -135,6 +134,27 @@ try {
         const localTree = walkSync(core.getInput("dir"));
         console.log(localTree)
         sync(localTree, crowdin_tree);
+
+        const cleanup = function (localTree, crowdin_tree, prefix) {
+            for (let i in crowdin_tree) {
+                //does this exist locally?
+                if (localTree[i]) {
+                    // is this a dir or a file?
+                    if (typeof crowdin_tree[i] === "object") {
+                        //yup, bye bye
+                        post("delete-directory", {}, ()=> {}, `$name=${prefix}/${i}`)
+                    } else {
+                        //nope, but it still goes the way of the dodo
+                        post("delete-file", {}, ()=> {}, `$name=docs/${crowdin_tree[i]}`)
+                    }
+                    //it does, does it have subobjects to clean?
+                } else if (typeof crowdin_tree[i] === "object") {
+                    cleanup(localTree[i], crowdin_tree[i], `${prefix}/${i}`)
+                }
+            }
+        }
+
+        cleanup(localTree, crowdin_tree, "docs");
 
 
     })
