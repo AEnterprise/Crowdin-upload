@@ -96,7 +96,6 @@ try {
             return tree;
         };
 
-        console.log(folder);
         const crowdin_tree = walk("", folder);
         console.log(crowdin_tree);
 
@@ -142,10 +141,10 @@ try {
                     // is this a dir or a file?
                     if (typeof crowdin_tree[i] === "object") {
                         //yup, bye bye
-                        post("delete-directory", {}, ()=> {}, `$name=${prefix}/${i}`)
+                        post("delete-directory", {}, ()=> {}, `&name=${prefix}/${i}`)
                     } else {
                         //nope, but it still goes the way of the dodo
-                        post("delete-file", {}, ()=> {}, `$name=docs/${crowdin_tree[i]}`)
+                        post("delete-file", {}, ()=> {}, `&name=docs/${crowdin_tree[i]}`)
                     }
                     //it does, does it have subobjects to clean?
                 } else if (typeof crowdin_tree[i] === "object") {
