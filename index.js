@@ -30,7 +30,6 @@ try {
                 if (e)
                     core.setFailed(e.message);
 
-                console.log(`statuscode: ${res.statusCode}`);
 
                 if (handler)
                     handler(JSON.parse(body))
@@ -44,7 +43,6 @@ try {
                 if (e)
                     core.setFailed(e.message);
 
-                console.log(`statuscode: ${res.statusCode}`);
 
                 if (handler)
                     handler(JSON.parse(body))
