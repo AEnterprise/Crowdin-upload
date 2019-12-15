@@ -119,7 +119,7 @@ try {
                     } else {
                         //it doesn't, create it
                         const data = {};
-                        data[`files.docs/${localTree[i].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
+                        data[`files.docs/${localTree[i].split(".")[0].split("/").filter((value, index) => index > 0).join("/")}`] = fs.createReadStream(localTree[i])
                         console.log(data);
                         upload("add-file", data)
                     }
