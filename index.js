@@ -55,7 +55,6 @@ try {
                 if (handler)
                     handler(JSON.parse(body))
             });
-        req.form().append("files", [fs.createReadStream(filename)]);
     };
 
 
