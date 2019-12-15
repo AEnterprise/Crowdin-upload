@@ -86,7 +86,9 @@ try {
             return tree;
         };
 
+        console.log(folder);
         const crowdin_tree = walk("", folder);
+        console.log(crowdin_tree);
 
         //loop over local tree and sync/create as needed
         const sync = function (localTree, crowdinTree) {
@@ -115,7 +117,9 @@ try {
             }
         };
 
-        sync(folder, crowdin_tree);
+        const localTree = walkSync(core.getInput("dir"));
+        console.log(localTree)
+        sync(localTree, crowdin_tree);
 
 
     })
