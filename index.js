@@ -33,6 +33,7 @@ try {
         };
         const req = https.request(options, res => {
             console.log(`statuscode: ${res.statusCode}`);
+            res.setEncoding('utf8');
 
             res.on('data', data => {
                 console.log(data);
